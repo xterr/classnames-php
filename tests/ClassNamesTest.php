@@ -4,6 +4,7 @@ namespace xterrunit\ClassNames;
 
 use PHPUnit\Framework\TestCase;
 use function xterr\ClassNames\classNames;
+use function xterr\ClassNames\classNamesConditions;
 use xterr\ClassNames\ClassNames;
 
 class ClassNamesTest extends TestCase
@@ -138,6 +139,17 @@ class ClassNamesTest extends TestCase
     {
         $oInstance = new ClassNames();
         $this->assertEquals('class1', $oInstance('class1'));
+    }
+
+    public function testAsConditions()
+    {
+        $actual = classNamesConditions('x-first', 'x-second', ['x-third' => TRUE], ['x-fourth' => FALSE], ['x-second' => FALSE], NULL, 0);
+        $this->assertEquals([
+            'x-first'  => TRUE,
+            'x-second' => FALSE,
+            'x-third'  => TRUE,
+            'x-fourth' => FALSE,
+        ], $actual);
     }
 }
 

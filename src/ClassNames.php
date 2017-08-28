@@ -32,6 +32,18 @@ class ClassNames
         return implode(' ', $aList);
     }
 
+    /**
+     * @return array
+     */
+    public function asConditions()
+    {
+        $aArgs             = func_get_args();
+        $this->_aResultSet = [];
+        $this->_parseArray($aArgs);
+
+        return $this->_aResultSet;
+    }
+
     protected function _parse($mArg, $bDefaultValue = TRUE)
     {
         if (!$mArg)
